@@ -1,15 +1,11 @@
-import { memo, useCallback, useContext, useMemo, useState, type FC } from "react";
+import { memo, useCallback, useMemo, type FC } from "react";
 import { useNavigate, useParams } from "react-router";
 import { DogApi } from "constants/DogApi";
 import { Pets } from "@mui/icons-material";
-import axios, { AxiosError, type AxiosResponse } from "axios";
-import { Button } from "components/atom/button/Button";
 import { FlexBox } from "components/atom/div/FlexBox";
-import { LoadingContext } from "contexts/context/LoadingContext";
-import { useOnceOnMount } from "hooks/UseOnceOnMount";
+import { Pagination } from "components/Pagination";
+import { useFetch } from "hooks/models/UseFetch";
 import type { RANDOM_DOG_LIST_RESPONSE } from "types/apis/dog-api/RandomDogList";
-import type { BaseContext } from "types/contexts/BaseContext";
-import type { LoadingContextDispatch, LoadingContextValue } from "types/contexts/context/LoadingContext";
 
 const PER_PAGE_COUNT: number = 5;
 
@@ -18,55 +14,29 @@ export const DogsListIndex: FC = memo(() => {
   const { index } = useParams();
   const indexNumber: number = Number(index);
 
-  const {
-    contextValue: { loading },
-    dispatch: { updateLoading }
-  } = useContext<BaseContext<LoadingContextValue, LoadingContextDispatch>>(LoadingContext);
-
-  const [dogsList, setDogsList] = useState<string[]>([]);
+  const { data, isFetching } = useFetch<RANDOM_DOG_LIST_RESPONSE>({ url: DogApi.RANDOM_LIST_50 });
 
   const handleChangePagination = useCallback((newIndex: string) => navigate(`/dogs/list/${newIndex}`), [navigate]);
 
-  const getRandomDogs = () => {
-    updateLoading(true);
-    axios
-      .get(DogApi.RANDOM_LIST_50)
-      .then((res: AxiosResponse<RANDOM_DOG_LIST_RESPONSE>) => setDogsList(res.data.message))
-      .catch((err: AxiosError<unknown, unknown>) => {
-        setDogsList([]);
-        console.log(err);
-      })
-      .finally(() => updateLoading(false));
-  };
-
   const displayedDogsList = useMemo(
-    () => dogsList.slice((indexNumber - 1) * PER_PAGE_COUNT, indexNumber * PER_PAGE_COUNT),
-    [indexNumber, dogsList]
+    () => (data ? data.message.slice((indexNumber - 1) * PER_PAGE_COUNT, indexNumber * PER_PAGE_COUNT) : []),
+    [indexNumber, data]
   );
-  const buttonsCount = useMemo(() => Math.ceil(dogsList.length / PER_PAGE_COUNT), [dogsList]);
-
-  useOnceOnMount(() => getRandomDogs());
 
   return (
     <FlexBox className='w-full h-full'>
-      <FlexBox className='w-full py-[10px]'>
-        <FlexBox horizontal className='join max-w-svw px-[5px] overflow-x-auto'>
-          {Array(buttonsCount)
-            .fill("")
-            .map((_, i) => i + 1)
-            .map((newIndex) => (
-              <Button
-                key={newIndex}
-                className={`${newIndex === indexNumber ? "btn-neutral" : undefined}`}
-                onClick={() => handleChangePagination(String(newIndex))}
-              >
-                {newIndex}
-              </Button>
-            ))}
+      {data?.message.length && (
+        <FlexBox className='w-full py-[10px]'>
+          <Pagination
+            currentIndex={index ?? "1"}
+            targetLength={data.message.length}
+            perPageCount={PER_PAGE_COUNT}
+            onChange={handleChangePagination}
+          />
         </FlexBox>
-      </FlexBox>
+      )}
       <FlexBox className='w-full object-contain'>
-        {loading
+        {isFetching
           ? Array(PER_PAGE_COUNT)
               .fill("")
               .map((_, i) => i)
@@ -85,22 +55,16 @@ export const DogsListIndex: FC = memo(() => {
               </div>
             ))}
       </FlexBox>
-      <FlexBox className='w-full py-[10px]'>
-        <FlexBox horizontal className='join max-w-svw px-[5px] overflow-x-auto'>
-          {Array(buttonsCount)
-            .fill("")
-            .map((_, i) => i + 1)
-            .map((newIndex) => (
-              <Button
-                key={newIndex}
-                className={`${newIndex === indexNumber ? "btn-neutral" : undefined}`}
-                onClick={() => handleChangePagination(String(newIndex))}
-              >
-                {newIndex}
-              </Button>
-            ))}
+      {data?.message.length && (
+        <FlexBox className='w-full py-[10px]'>
+          <Pagination
+            currentIndex={index ?? "1"}
+            targetLength={data.message.length}
+            perPageCount={PER_PAGE_COUNT}
+            onChange={handleChangePagination}
+          />
         </FlexBox>
-      </FlexBox>
+      )}
     </FlexBox>
   );
 });
