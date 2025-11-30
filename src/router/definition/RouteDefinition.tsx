@@ -1,29 +1,8 @@
-import type { ReactNode } from "react";
+import { Dogs } from "pages/dogs";
 import { Index } from "pages/index";
+import { DogsRouteDefinition } from "router/definition/dogs/DogsRouteDefinition";
 
-type RouteKey = "INDEX";
-
-interface BaseRouteObject {
-  /**
-   * 表示する要素
-   * @type {ReactNode}
-   */
-  element: ReactNode;
-
-  /**
-   * パス
-   * @type {string}
-   */
-  path: string;
-}
-
-export interface RouteObject extends BaseRouteObject {
-  /**
-   * ネストしたルーティング
-   */
-  childRoutes?: RouteObject[];
-}
-
-export const RouteDefinition: Record<RouteKey, RouteObject> = {
-  INDEX: { element: <Index />, path: "/" }
+export const RouteDefinition = {
+  INDEX: { element: <Index />, title: "TOP", path: "/" },
+  DOGS: { element: <Dogs />, title: "わんこ", path: "/dogs", childRoutes: Object.values(DogsRouteDefinition) }
 } as const;
