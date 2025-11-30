@@ -8,6 +8,12 @@ interface BaseRouteObject {
   element: ReactNode;
 
   /**
+   * タイトル
+   * @type {string}
+   */
+  title: string;
+
+  /**
    * パス
    * @type {string}
    */

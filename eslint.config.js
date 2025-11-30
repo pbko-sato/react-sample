@@ -22,6 +22,7 @@ export default defineConfig([
     },
     plugins: { import: importOrder },
     rules: {
+      "@typescript-eslint/no-empty-object-type": "off",
       "import/order": [
         "error",
         {

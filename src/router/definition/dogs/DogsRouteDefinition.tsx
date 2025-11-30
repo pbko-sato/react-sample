@@ -7,11 +7,13 @@ export const DogsRouteDefinition = {
   LIST: {
     element: <DogsList />,
     path: "/dogs/list",
-    childRoutes: [{ element: <DogsListIndex />, path: "/dogs/list/:index" }]
+    title: "わんこ一覧",
+    childRoutes: [{ element: <DogsListIndex />, title: "わんこ一覧", path: "/dogs/list/:index" }]
   },
   DETAIL: {
     element: <DogsDetail />,
     path: "/dogs/detail",
-    childRoutes: [{ element: <DogsDetailBreed />, path: "/dogs/detail/:breed" }]
+    title: "わんこ詳細",
+    childRoutes: [{ element: <DogsDetailBreed />, title: "わんこ詳細", path: "/dogs/detail/:breed" }]
   }
 } as const;
