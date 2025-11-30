@@ -1,42 +1,18 @@
 import { memo, type FC } from "react";
-import { Link } from "react-router";
-import { RouteDefinition } from "router/definition/RouteDefinition";
+import { FlexBox } from "components/atom/div/FlexBox";
+import { ZIndex } from "styles/constants/ZIndex";
 
 export const Header: FC = memo(() => (
   <header
-    style={{
-      width: "100%",
-      height: "100px",
-      top: 0,
-      left: 0,
-      position: "sticky",
-      opacity: 1,
-      backgroundColor: "#FFFFFF",
-      zIndex: 1000
-    }}
+    className={`navbar w-full h-[70px] top-0 left-0 py-0 sticky z-${ZIndex.LAYOUT} bg-green-50 opacity-95 shadow-md`}
   >
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "5px",
-        borderBottom: "1px solid #000000"
-      }}
-    >
+    <FlexBox horizontal justify='justify-between' className='w-full p-[5px]'>
       <div>
-        <h1>サンプルアプリ</h1>
+        <h1 className='text-5xl'>サンプルアプリ</h1>
       </div>
       <div>
-        <nav>
-          <ul style={{ listStyle: "none" }}>
-            <li>
-              <Link to={RouteDefinition.INDEX.path}>「{RouteDefinition.INDEX.path}」</Link>
-            </li>
-          </ul>
-        </nav>
+        <nav></nav>
       </div>
-    </div>
+    </FlexBox>
   </header>
 ));

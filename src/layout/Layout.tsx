@@ -9,4 +9,6 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-export const Layout: FC<LayoutProps> = memo(({ children }) => <LayoutView>{children}</LayoutView>);
+export const Layout: FC<LayoutProps> = memo(({ children }) => (
+  <LayoutView footerText='フッター'>{children}</LayoutView>
+));

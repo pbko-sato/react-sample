@@ -9,12 +9,18 @@ interface LayoutViewProps {
    * @type {ReactNode}
    */
   children: ReactNode;
+
+  /**
+   * フッターの文言
+   * @type {string}
+   */
+  footerText: string;
 }
 
-export const LayoutView: FC<LayoutViewProps> = memo(({ children }) => (
+export const LayoutView: FC<LayoutViewProps> = memo(({ children, footerText }) => (
   <>
     <Header />
     <Main>{children}</Main>
-    <Footer />
+    <Footer footerText={footerText} />
   </>
 ));
