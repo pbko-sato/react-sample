@@ -42,7 +42,7 @@ export const Header: FC<HeaderProps> = memo(({ dropdownTarget, dropdownRef, onCl
             </summary>
             <ul className='menu dropdown-content min-w-[100px] p-0 bg-white shadow-md'>
               {dropdownTarget.map(({ path, title }) => (
-                <li>
+                <li key={path}>
                   <Button onClick={() => onClickDropdown(path)}>{title}</Button>
                 </li>
               ))}
