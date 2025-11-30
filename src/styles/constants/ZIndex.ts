@@ -9,5 +9,11 @@ export const ZIndex = {
    * ヘッダー・フッター
    * @type {number}
    */
-  LAYOUT: 1000
+  LAYOUT: 1000,
+
+  /**
+   * ローディング
+   * @type {number}
+   */
+  LOADING: 5000
 } as const;
