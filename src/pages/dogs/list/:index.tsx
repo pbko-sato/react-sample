@@ -2,6 +2,7 @@ import { memo, useCallback, useMemo, type FC } from "react";
 import { useNavigate, useParams } from "react-router";
 import { DogApi } from "constants/DogApi";
 import { Pets } from "@mui/icons-material";
+import { Card } from "components/atom/div/Card";
 import { FlexBox } from "components/atom/div/FlexBox";
 import { Pagination } from "components/Pagination";
 import { useFetch } from "hooks/models/UseFetch";
@@ -17,6 +18,8 @@ export const DogsListIndex: FC = memo(() => {
   const { data, isFetching } = useFetch<RANDOM_DOG_LIST_RESPONSE>({ url: DogApi.RANDOM_LIST_50 });
 
   const handleChangePagination = useCallback((newIndex: string) => navigate(`/dogs/list/${newIndex}`), [navigate]);
+
+  const handleClickCheck = useCallback((link: string) => window.open(link), []);
 
   const displayedDogsList = useMemo(
     () => (data ? data.message.slice((indexNumber - 1) * PER_PAGE_COUNT, indexNumber * PER_PAGE_COUNT) : []),
@@ -48,11 +51,11 @@ export const DogsListIndex: FC = memo(() => {
                 </FlexBox>
               ))
           : displayedDogsList.map((link) => (
-              <div key={link} className='card bg-base-100 w-full m-[5px] shadow-md'>
+              <Card key={link} className='cursor-pointer' onClick={() => handleClickCheck(link)}>
                 <div className='avatar'>
                   <img src={link} className='rounded-xl' />
                 </div>
-              </div>
+              </Card>
             ))}
       </FlexBox>
       {data?.message.length && (
