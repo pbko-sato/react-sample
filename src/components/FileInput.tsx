@@ -54,13 +54,13 @@ export const FileInput: FC<FileInputProps> = memo(({ ref, multiple, accept }) =>
 
   return (
     <>
-      <img src={fileInputImage} width={160} height={120} style={{ cursor: "pointer" }} onClick={handleClickImage} />
+      <img className='cursor-pointer' src={fileInputImage} width={160} height={120} onClick={handleClickImage} />
       <input
+        className='hidden'
         ref={fileInputRef}
         type='file'
         multiple={multiple}
         accept={accept && accept.join(",")}
-        style={{ display: "none" }}
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeFile(e.currentTarget.files)}
       />
     </>

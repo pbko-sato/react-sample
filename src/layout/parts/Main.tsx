@@ -9,7 +9,7 @@ interface MainProps {
 }
 
 export const Main: FC<MainProps> = memo(({ children }) => (
-  <main style={{ minHeight: "calc(100svh - 132px)", overflow: "auto" }}>
-    <div style={{ padding: "5px" }}>{children}</div>
+  <main className='overflow-auto' style={{ minHeight: "calc(100svh - 100px)" }}>
+    <div className='p-[5px]'>{children}</div>
   </main>
 ));
