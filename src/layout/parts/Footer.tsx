@@ -11,9 +11,7 @@ interface FooterProps {
 }
 
 export const Footer: FC<FooterProps> = memo(({ footerText }) => (
-  <footer
-    className={`footer w-full h-[30px] bottom-0 left-0 sticky z-${ZIndex.LAYOUT} bg-green-50 opacity-95 shadow-md`}
-  >
+  <footer className={`footer w-full h-[30px] bottom-0 left-0 sticky ${ZIndex.LAYOUT} bg-green-50 opacity-95 shadow-md`}>
     <FlexBox className='w-full p-[5px]'>
       <span>{footerText}</span>
     </FlexBox>

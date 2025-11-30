@@ -39,7 +39,7 @@ export const Pagination: FC<PaginationProps> = memo(({ currentIndex, targetLengt
   };
 
   return (
-    <FlexBox horizontal className='join max-w-svw px-[5px] overflow-auto'>
+    <FlexBox horizontal className='join max-w-svw px-[5px] overflow-x-auto'>
       {Array(buttonsCount)
         .fill("")
         .map((_, i) => i + 1)

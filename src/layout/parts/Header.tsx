@@ -28,7 +28,7 @@ interface HeaderProps {
 
 export const Header: FC<HeaderProps> = memo(({ dropdownTarget, dropdownRef, onClickDropdown }) => (
   <header
-    className={`navbar w-full h-[70px] top-0 left-0 py-0 sticky z-${ZIndex.LAYOUT} bg-green-50 opacity-95 shadow-md`}
+    className={`navbar w-full h-[70px] top-0 left-0 py-0 sticky ${ZIndex.LAYOUT} bg-green-50 opacity-95 shadow-md`}
   >
     <FlexBox horizontal justify='justify-between' className='w-full p-[5px]'>
       <div>

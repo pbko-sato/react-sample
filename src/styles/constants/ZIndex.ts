@@ -1,19 +1,19 @@
 export const ZIndex = {
   /**
    * メインコンテンツ部のベース
-   * @type {number}
+   * @type {string}
    */
-  BASE: 1,
+  BASE: "z-1",
 
   /**
    * ヘッダー・フッター
-   * @type {number}
+   * @type {string}
    */
-  LAYOUT: 1000,
+  LAYOUT: "z-1000",
 
   /**
    * ローディング
-   * @type {number}
+   * @type {string}
    */
-  LOADING: 5000
+  LOADING: "z-5000"
 } as const;

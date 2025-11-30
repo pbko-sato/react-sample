@@ -4,13 +4,8 @@ import { FlexBox } from "components/atom/div/FlexBox";
 
 export const DogsList: FC = memo(() => {
   return (
-    <FlexBox className='w-full'>
-      <FlexBox className='w-full'>
-        <></>
-      </FlexBox>
-      <FlexBox className='w-full'>
-        <Outlet />
-      </FlexBox>
+    <FlexBox className='w-full h-full'>
+      <Outlet />
     </FlexBox>
   );
 });
