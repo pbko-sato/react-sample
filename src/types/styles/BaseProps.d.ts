@@ -12,4 +12,10 @@ export interface BaseProps {
    * @type {string}
    */
   className?: string;
+
+  /**
+   * onClick属性
+   * @returns {void}
+   */
+  onClick?: () => void;
 }
