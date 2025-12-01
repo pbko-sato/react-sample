@@ -8,19 +8,34 @@ import { Pagination } from "components/Pagination";
 import { useFetch } from "hooks/models/UseFetch";
 import type { RANDOM_DOG_LIST_RESPONSE } from "types/apis/dog-api/RandomDogList";
 
+/**
+ * わんこの一覧1ページに表示する画像の数
+ * @type {number}
+ */
 const PER_PAGE_COUNT: number = 5;
 
+/**
+ * 「/dogs/list/:index」で表示される、わんこの一覧を表示するページ
+ * @type {FC}
+ */
 export const DogsListIndex: FC = memo(() => {
+  // 画面遷移用の関数
   const navigate = useNavigate();
+  // パスパラメータの「index」 例)/dogs/list/1の「1」
   const { index } = useParams();
   const indexNumber: number = Number(index);
 
+  // わんこの一覧データを取得
   const { data, isFetching } = useFetch<RANDOM_DOG_LIST_RESPONSE>({ url: DogApi.RANDOM_LIST_50 });
 
+  // ページ変化時の処理
   const handleChangePagination = useCallback((newIndex: string) => navigate(`/dogs/list/${newIndex}`), [navigate]);
 
-  const handleClickCheck = useCallback((link: string) => window.open(link), []);
+  // わんこのカード押下時の処理
+  const handleClickDogCard = useCallback((link: string) => window.open(link), []);
 
+  // 表示されているわんこの一覧
+  // わんこの一覧データの配列から、パスパラメータの「index」をもとに切り出し
   const displayedDogsList = useMemo(
     () => (data ? data.message.slice((indexNumber - 1) * PER_PAGE_COUNT, indexNumber * PER_PAGE_COUNT) : []),
     [indexNumber, data]
@@ -28,6 +43,7 @@ export const DogsListIndex: FC = memo(() => {
 
   return (
     <FlexBox className='w-full h-full'>
+      {/* ページング部品(わんこの一覧データがある場合のみ表示) */}
       {data?.message.length && (
         <FlexBox className='w-full py-[10px]'>
           <Pagination
@@ -39,6 +55,8 @@ export const DogsListIndex: FC = memo(() => {
         </FlexBox>
       )}
       <FlexBox className='w-full object-contain'>
+        {/* わんこの一覧を表示 */}
+        {/* フェッチ中はダミーを表示。フェッチ後はわんこの一覧を表示 */}
         {isFetching
           ? Array(PER_PAGE_COUNT)
               .fill("")
@@ -51,13 +69,17 @@ export const DogsListIndex: FC = memo(() => {
                 </FlexBox>
               ))
           : displayedDogsList.map((link) => (
-              <Card key={link} className='cursor-pointer' onClick={() => handleClickCheck(link)}>
-                <div className='avatar'>
-                  <img src={link} className='rounded-xl' />
-                </div>
-              </Card>
+              <>
+                {/* 押下すると、別タブでわんこの画像を表示 */}
+                <Card key={link} className='cursor-pointer' onClick={() => handleClickDogCard(link)}>
+                  <div className='avatar'>
+                    <img src={link} className='rounded-xl' />
+                  </div>
+                </Card>
+              </>
             ))}
       </FlexBox>
+      {/* ページング部品(わんこの一覧データがある場合のみ表示) */}
       {data?.message.length && (
         <FlexBox className='w-full py-[10px]'>
           <Pagination
