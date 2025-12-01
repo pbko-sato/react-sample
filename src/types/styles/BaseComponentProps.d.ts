@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export interface BaseProps {
+export interface BaseComponentProps {
   /**
    * 子要素
    * @type {ReactNode}
@@ -12,4 +12,10 @@ export interface BaseProps {
    * @type {string}
    */
   className?: string;
+
+  /**
+   * onClick属性
+   * @returns {void}
+   */
+  onClick?: () => void;
 }
