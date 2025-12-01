@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export interface BaseProps {
+export interface BaseComponentProps {
   /**
    * 子要素
    * @type {ReactNode}

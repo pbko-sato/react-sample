@@ -1,7 +1,7 @@
 import { memo, type FC } from "react";
-import type { BaseProps } from "types/styles/BaseProps";
+import type { BaseComponentProps } from "types/styles/BaseComponentProps";
 
-interface ButtonProps extends BaseProps {}
+interface ButtonProps extends BaseComponentProps {}
 
 export const Button: FC<ButtonProps> = memo(({ children, className, onClick }) => (
   <button className={`btn rounded-sm ${className && ` ${className}`}`} onClick={onClick}>
