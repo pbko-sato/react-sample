@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bun run build && bun run vite-dev",
+    "dev": "npm run build && npm run vite-dev",
     "vite-dev": "vite",
-    "build": "bun run prettier && bun run lint && bun run type-check && bun run vite-build",
+    "build": "npm run prettier && npm run lint && npm run type-check && npm run vite-build",
     "prettier": "prettier --write **.{js,ts,tsx,html,json}",
     "lint": "eslint .",
     "type-check": "tsc -b",
