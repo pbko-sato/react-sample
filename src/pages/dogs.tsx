@@ -8,7 +8,7 @@ export const Dogs: FC = memo(() => {
       <FlexBox className='w-full'>
         <p>わんこのページにようこそ!</p>
       </FlexBox>
-      <FlexBox>
+      <FlexBox className='w-full'>
         <Outlet />
       </FlexBox>
     </FlexBox>
