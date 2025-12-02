@@ -14,7 +14,7 @@ export const FlexBox: FC<FlexBoxProps> = memo(
     onClick
   }) => (
     <div
-      className={`flex ${horizontal ? "flex-row" : "flex-col"} ${justify} ${align}${className && ` ${className}`}`}
+      className={`flex ${horizontal ? "flex-row" : "flex-col"} ${justify} ${align}${className ? ` ${className}` : ""}`}
       onClick={onClick}
     >
       {children}
