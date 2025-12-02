@@ -1,18 +1,13 @@
 import { memo, useCallback, useMemo, type FC } from "react";
 import { useNavigate, useParams } from "react-router";
 import { DogApi } from "constants/DogApi";
+import { PER_PAGE_COUNT } from "constants/PerPageCount";
 import { Pets } from "@mui/icons-material";
 import { Card } from "components/atom/div/Card";
 import { FlexBox } from "components/atom/div/FlexBox";
 import { Pagination } from "components/Pagination";
 import { useFetch } from "hooks/models/UseFetch";
 import type { RANDOM_DOG_LIST_RESPONSE } from "types/apis/dog-api/RandomDogList";
-
-/**
- * わんこの一覧1ページに表示する画像の数
- * @type {number}
- */
-const PER_PAGE_COUNT: number = 5;
 
 /**
  * 「/dogs/list/:index」で表示される、わんこの一覧を表示するページ
