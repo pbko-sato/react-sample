@@ -9,5 +9,17 @@ export const DogApi = {
    * 全犬種を取得するエンドポイント
    * @type {string}
    */
-  ALL_BREEDS: "https://dog.ceo/api/breeds/list/all"
+  ALL_BREEDS: "https://dog.ceo/api/breeds/list/all",
+
+  /**
+   * 犬種ごとのランダムな犬の画像を10000件取得するエンドポイント
+   * @type {string}
+   */
+  RANDOM_LIST_10000_BY_BREED: "https://dog.ceo/api/breed/:breed/images/random/10000",
+
+  /**
+   * サブ犬種ごとのランダムな犬の画像を10000件取得するエンドポイント
+   * @type {string}
+   */
+  RANDOM_LIST_10000_BY_SUB_BREED: "https://dog.ceo/api/breed/:breed/:sub-breed/images/random/10000"
 } as const;
